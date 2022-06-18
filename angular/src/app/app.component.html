@@ -1,0 +1,61 @@
+<style>
+  .row {
+    margin: 16px 32px;
+  }
+
+  .space {
+    margin: 0px 6px 0px 6px;
+  }
+
+</style>
+<div class="row">
+    <div class="example-table-container">
+        <mat-table #table [dataSource]="mentor">
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>NAME </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.last_name}} {{element.first_name}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="user_type">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>User Type </mat-header-cell>
+                <mat-cell *matCellDef="let element"> 
+                    <mat-chip-list aria-label="Fish selection">
+                        <mat-chip color="primary">{{element.company.user_type}}</mat-chip>
+                    </mat-chip-list>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="entity">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Entity </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.company.name}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="status">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Status </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.user_status}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="action">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Action </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <div class="space">
+                        <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+                            <mat-icon>edit</mat-icon>
+                        </button> 
+                    </div>
+                    <div class="space">
+                        <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+                            <mat-icon>mail</mat-icon>
+                        </button>
+                    </div>
+                    <div class="space">
+                        <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </div>
+                </mat-cell>
+            </ng-container>
+
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="row.toggle(row)">
+            </mat-row>
+        </mat-table>
+    </div>
+</div>
